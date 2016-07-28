@@ -11,7 +11,7 @@ export default Component.extend({
     open: false,
 
     navMenuIcon: computed('ghostPaths.subdir', function () {
-        let url = `${this.get('ghostPaths.subdir')}/ghost/img/ghosticon.jpg`;
+        let url = `${this.get('ghostPaths.subdir')}/ghost/img/logo-120x120x.png`;
 
         return htmlSafe(`background-image: url(${url})`);
     }),

@@ -11,31 +11,31 @@
             <fieldset>
 
                 {{#gh-form-group errors=model.errors hasValidated=model.hasValidated property="title"}}
-                    <label for="blog-title">Blog Title</label>
+                    <label for="blog-title">Application Title</label>
                     {{gh-input model.title id="blog-title" name="general[title]" type="text" focusOut=(action "validate" "title" target=model) update=(action (mut model.title))}}
                     {{gh-error-message errors=model.errors property="title"}}
-                    <p>The name of your blog</p>
+                    <p>This will appear in the site title and other parts of the application</p>
                 {{/gh-form-group}}
 
                 {{#gh-form-group errors=model.errors hasValidated=model.hasValidated property="description" class="description-container"}}
-                    <label for="blog-description">Blog Description</label>
-                    {{gh-textarea model.description id="blog-description" name="general[description]" focusOut=(action "validate" "description" target=model) update=(action (mut model.description))}}
+                    <label for="blog-description">Slogan</label>
+                    {{gh-textarea id="blog-description" class="gh-input" name="general[description]" value=model.description focusOut=(action "validate" "description" target=model)}}
                     {{gh-error-message errors=model.errors property="description"}}
                     <p>
-                        Describe what your blog is about
+                        A brief description of IdeaMarket
                         {{gh-count-characters model.description}}
                     </p>
                 {{/gh-form-group}}
             </fieldset>
 
             <div class="form-group">
-                <label>Blog Logo</label>
+                <label>IdeaMarket Logo</label>
                 {{#if model.logo}}
                     <img class="blog-logo" src="{{model.logo}}" alt="logo" role="button" {{action "toggleUploadLogoModal"}}>
                 {{else}}
                     <button type="button" class="btn btn-green js-modal-logo" {{action "toggleUploadLogoModal"}}>Upload Image</button>
                 {{/if}}
-                <p>Display a logo for your publication</p>
+                <p>Be careful in choosing the image since this may appear on both dark and light background</p>
 
                 {{#if showUploadLogoModal}}
                     {{gh-fullscreen-modal "upload-image"
@@ -46,13 +46,13 @@
             </div>
 
             <div class="form-group">
-                <label>Blog Cover</label>
+                <label>Landing Page Banner</label>
                 {{#if model.cover}}
                     <img class="blog-cover" src="{{model.cover}}" alt="cover photo" role="button" {{action "toggleUploadCoverModal"}}>
                 {{else}}
                     <button type="button" class="btn btn-green js-modal-cover" {{action "toggleUploadCoverModal"}}>Upload Image</button>
                 {{/if}}
-                <p>Display a cover image on your site</p>
+                <p>This will serve as banner on the landing page</p>
 
                 {{#if showUploadCoverModal}}
                     {{gh-fullscreen-modal "upload-image"
@@ -65,10 +65,10 @@
             <fieldset>
 
                 <div class="form-group">
-                    <label for="postsPerPage">Posts per page</label>
+                    <label for="postsPerPage">Ideas per page</label>
                     {{! `pattern` brings up numeric keypad allowing any number of digits}}
-                    {{gh-input model.postsPerPage id="postsPerPage" name="general[postsPerPage]" focus-out="checkPostsPerPage" min="1" max="1000" type="number" pattern="[0-9]*" update=(action (mut model.postsPerPage))}}
-                    <p>How many posts should be displayed on each page</p>
+                    {{gh-input id="postsPerPage" class="gh-input" name="general[postsPerPage]" focus-out="checkPostsPerPage" value=model.postsPerPage min="1" max="1000" type="number" pattern="[0-9]*"}}
+                    <p>How many ideas should be displayed on each page</p>
                 </div>
 
                 <div class="form-group for-checkbox">
@@ -76,7 +76,7 @@
                     <label class="checkbox" for="permalinks">
                         {{one-way-checkbox isDatedPermalinks id="permalinks" class="gh-input" name="general[permalinks]" update=(action (mut isDatedPermalinks))}}
                         <span class="input-toggle-component"></span>
-                        <p>Include the date in your post URLs</p>
+                        <p>Include the date in the idea URLs</p>
                     </label>
                 </div>
 
@@ -93,7 +93,7 @@
                             action="setTheme"
                         }}
                    </span>
-                    <p>Select a theme for your blog</p>
+                    <p>Select a theme for IdeaMarket</p>
                 </div>
 
                 <div class="form-group">
@@ -119,7 +119,7 @@
                         update=(action "setTimezone")}}
 
                 <div class="form-group for-checkbox">
-                    <label for="isPrivate">Make this blog private</label>
+                    <label for="isPrivate">Make IdeaMarket private</label>
                     <label class="checkbox" for="isPrivate">
                         {{one-way-checkbox model.isPrivate id="isPrivate" name="general[isPrivate]" type="checkbox" update=(action (mut model.isPrivate))}}
                         <span class="input-toggle-component"></span>
@@ -131,7 +131,7 @@
                     {{#gh-form-group errors=model.errors hasValidated=model.hasValidated property="password"}}
                         {{gh-input model.password name="general[password]" type="text" focusOut=(action "validate" "password" target=model) update=(action (mut model.password))}}
                         {{gh-error-message errors=model.errors property="password"}}
-                        <p>This password will be needed to access your blog. All search engine optimization and social features are now disabled. This password is stored in plaintext.</p>
+                        <p>This password will be needed to access the IdeaMarket. All search engine optimization and social features are now disabled. This password is stored in plaintext.</p>
                     {{/gh-form-group}}
                 {{/if}}
             </fieldset>

@@ -20,7 +20,7 @@ export default [
         updated_at: '2015-10-04T16:26:05.198Z',
         updated_by: 1,
         uuid: 'e6c8b636-6925-4c4a-a5d9-1dc0870fb8ea',
-        value: 'Thoughts, stories and ideas.'
+        value: 'The largest online community of ideators around the world. Join now for FREE!'
     },
     {
         id: 3,
