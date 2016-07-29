@@ -6,7 +6,7 @@ import get from 'ember-metal/get';
 import injectService from 'ember-service/inject';
 import {htmlSafe} from 'ember-string';
 
-import boundOneWay from 'ghost-admin/utils/bound-one-way';
+import boundOneWay from 'ideamarket-admin/utils/bound-one-way';
 import {invokeAction} from 'ember-invoke-action';
 
 // ember-cli-shims doesn't export this

@@ -1,5 +1,5 @@
 import {A as emberA} from 'ember-array/utils';
-import ModalComponent from 'ghost-admin/components/modals/base';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
 
 export default ModalComponent.extend({
     actions: {

@@ -2,9 +2,9 @@ import Component from 'ember-component';
 import computed, {equal} from 'ember-computed';
 import run from 'ember-runloop';
 
-import ShortcutsMixin from 'ghost-admin/mixins/shortcuts';
-import imageManager from 'ghost-admin/utils/ed-image-manager';
-import editorShortcuts from 'ghost-admin/utils/editor-shortcuts';
+import ShortcutsMixin from 'ideamarket-admin/mixins/shortcuts';
+import imageManager from 'ideamarket-admin/utils/ed-image-manager';
+import editorShortcuts from 'ideamarket-admin/utils/editor-shortcuts';
 import {invokeAction} from 'ember-invoke-action';
 
 export default Component.extend(ShortcutsMixin, {

@@ -169,7 +169,7 @@ module.exports = function(grunt) {
             }),
             getTopContribs({
                 user: 'tryghost',
-                repo: 'ghost-admin',
+                repo: 'ideamarket-admin',
                 oauthKey: oauthKey,
                 sinceDate: timeSpan,
                 count: contribNumber,

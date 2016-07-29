@@ -3,7 +3,7 @@
 
 module.exports = function (environment) {
     var ENV = {
-        modulePrefix: 'ghost-admin',
+        modulePrefix: 'ideamarket-admin',
         environment: environment,
         baseURL: '/',
         locationType: 'trailing-history',

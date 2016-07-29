@@ -1,4 +1,4 @@
-import EmbeddedRelationAdapter from 'ghost-admin/adapters/embedded-relation-adapter';
+import EmbeddedRelationAdapter from 'ideamarket-admin/adapters/embedded-relation-adapter';
 
 export default EmbeddedRelationAdapter.extend({
 

@@ -1,6 +1,6 @@
 import {helper} from 'ember-helper';
 import {htmlSafe} from 'ember-string';
-import ghostPaths from 'ghost-admin/utils/ghost-paths';
+import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
 
 // Handlebars Helper {{gh-path}}
 // Usage: Assume 'http://www.myghostblog.org/myblog/'

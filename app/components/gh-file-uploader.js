@@ -10,7 +10,7 @@ import {
     isVersionMismatchError,
     isRequestEntityTooLargeError,
     isUnsupportedMediaTypeError
-} from 'ghost-admin/services/ajax';
+} from 'ideamarket-admin/services/ajax';
 
 export default Component.extend({
     tagName: 'section',

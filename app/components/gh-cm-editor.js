@@ -3,7 +3,7 @@ import Component from 'ember-component';
 import run, {bind, scheduleOnce} from 'ember-runloop';
 import injectService from 'ember-service/inject';
 
-import boundOneWay from 'ghost-admin/utils/bound-one-way';
+import boundOneWay from 'ideamarket-admin/utils/bound-one-way';
 import {InvokeActionMixin} from 'ember-invoke-action';
 
 const CmEditorComponent =  Component.extend(InvokeActionMixin, {

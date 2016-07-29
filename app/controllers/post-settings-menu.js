@@ -11,11 +11,11 @@ import {isBlank} from 'ember-utils';
 import observer from 'ember-metal/observer';
 import run from 'ember-runloop';
 
-import {parseDateString} from 'ghost-admin/utils/date-formatting';
-import SettingsMenuMixin from 'ghost-admin/mixins/settings-menu-controller';
-import boundOneWay from 'ghost-admin/utils/bound-one-way';
-import isNumber from 'ghost-admin/utils/isNumber';
-import {isVersionMismatchError} from 'ghost-admin/services/ajax';
+import {parseDateString} from 'ideamarket-admin/utils/date-formatting';
+import SettingsMenuMixin from 'ideamarket-admin/mixins/settings-menu-controller';
+import boundOneWay from 'ideamarket-admin/utils/bound-one-way';
+import isNumber from 'ideamarket-admin/utils/isNumber';
+import {isVersionMismatchError} from 'ideamarket-admin/services/ajax';
 
 const {ArrayProxy, Handlebars, PromiseProxyMixin} = Ember;
 

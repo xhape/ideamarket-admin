@@ -1,5 +1,5 @@
 import injectService from 'ember-service/inject';
-import DropdownButton from 'ghost-admin/components/gh-dropdown-button';
+import DropdownButton from 'ideamarket-admin/components/gh-dropdown-button';
 
 function K() {
     return this;

@@ -6,12 +6,12 @@ import {isBlank} from 'ember-utils';
 import run from 'ember-runloop';
 
 import {invokeAction} from 'ember-invoke-action';
-import ghostPaths from 'ghost-admin/utils/ghost-paths';
+import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
 import {
     isRequestEntityTooLargeError,
     isUnsupportedMediaTypeError,
     isVersionMismatchError
-} from 'ghost-admin/services/ajax';
+} from 'ideamarket-admin/services/ajax';
 
 export default Component.extend({
     tagName: 'section',

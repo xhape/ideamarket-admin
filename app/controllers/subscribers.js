@@ -5,8 +5,8 @@ import injectService from 'ember-service/inject';
 import Controller from 'ember-controller';
 
 import Table from 'ember-light-table';
-import PaginationMixin from 'ghost-admin/mixins/pagination';
-import ghostPaths from 'ghost-admin/utils/ghost-paths';
+import PaginationMixin from 'ideamarket-admin/mixins/pagination';
+import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
 
 export default Controller.extend(PaginationMixin, {
 

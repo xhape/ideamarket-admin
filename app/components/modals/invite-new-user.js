@@ -2,8 +2,8 @@ import RSVP from 'rsvp';
 import injectService from 'ember-service/inject';
 import {A as emberA} from 'ember-array/utils';
 import run from 'ember-runloop';
-import ModalComponent from 'ghost-admin/components/modals/base';
-import ValidationEngine from 'ghost-admin/mixins/validation-engine';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
 const {Promise} = RSVP;
 

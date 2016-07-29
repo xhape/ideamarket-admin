@@ -1,6 +1,6 @@
 import Controller from 'ember-controller';
 import injectService from 'ember-service/inject';
-import SettingsSaveMixin from 'ghost-admin/mixins/settings-save';
+import SettingsSaveMixin from 'ideamarket-admin/mixins/settings-save';
 
 export default Controller.extend(SettingsSaveMixin, {
     notifications: injectService(),

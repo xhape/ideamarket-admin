@@ -2,8 +2,8 @@ import RSVP from 'rsvp';
 import Controller from 'ember-controller';
 import computed from 'ember-computed';
 import injectService from 'ember-service/inject';
-import SettingsSaveMixin from 'ghost-admin/mixins/settings-save';
-import NavigationItem from 'ghost-admin/models/navigation-item';
+import SettingsSaveMixin from 'ideamarket-admin/mixins/settings-save';
+import NavigationItem from 'ideamarket-admin/models/navigation-item';
 
 export default Controller.extend(SettingsSaveMixin, {
     config: injectService(),

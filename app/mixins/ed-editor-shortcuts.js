@@ -1,6 +1,6 @@
 /* global moment, Showdown */
 import Mixin from 'ember-metal/mixin';
-import titleize from 'ghost-admin/utils/titleize';
+import titleize from 'ideamarket-admin/utils/titleize';
 
 // Used for simple, noncomputational replace-and-go! shortcuts.
 // See default case in shortcut function below.

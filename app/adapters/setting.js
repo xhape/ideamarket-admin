@@ -1,4 +1,4 @@
-import ApplicationAdapter from 'ghost-admin/adapters/application';
+import ApplicationAdapter from 'ideamarket-admin/adapters/application';
 
 export default ApplicationAdapter.extend({
     updateRecord(store, type, record) {

@@ -4,7 +4,7 @@ import injectService from 'ember-service/inject';
 import {isEmberArray} from 'ember-array/utils';
 import AjaxService from 'ember-ajax/services/ajax';
 import {AjaxError, isAjaxError} from 'ember-ajax/errors';
-import config from 'ghost-admin/config/environment';
+import config from 'ideamarket-admin/config/environment';
 
 /* Version mismatch error */
 

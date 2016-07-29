@@ -1,9 +1,9 @@
 /* global key */
 import $ from 'jquery';
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
-import CurrentUserSettings from 'ghost-admin/mixins/current-user-settings';
-import ShortcutsRoute from 'ghost-admin/mixins/shortcuts-route';
-import PaginationMixin from 'ghost-admin/mixins/pagination';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
+import CurrentUserSettings from 'ideamarket-admin/mixins/current-user-settings';
+import ShortcutsRoute from 'ideamarket-admin/mixins/shortcuts-route';
+import PaginationMixin from 'ideamarket-admin/mixins/pagination';
 
 export default AuthenticatedRoute.extend(CurrentUserSettings, PaginationMixin, ShortcutsRoute, {
     titleToken: 'Settings - Tags',

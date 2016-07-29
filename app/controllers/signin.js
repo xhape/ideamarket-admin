@@ -7,8 +7,8 @@ import {isEmberArray} from 'ember-array/utils';
 import {
     VersionMismatchError,
     isVersionMismatchError
-} from 'ghost-admin/services/ajax';
-import ValidationEngine from 'ghost-admin/mixins/validation-engine';
+} from 'ideamarket-admin/services/ajax';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
 export default Controller.extend(ValidationEngine, {
     submitting: false,

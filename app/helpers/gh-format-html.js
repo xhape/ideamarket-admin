@@ -1,7 +1,7 @@
 /* global html_sanitize*/
 import {helper} from 'ember-helper';
 import {htmlSafe} from 'ember-string';
-import cajaSanitizers from 'ghost-admin/utils/caja-sanitizers';
+import cajaSanitizers from 'ideamarket-admin/utils/caja-sanitizers';
 
 export default helper(function (params) {
     if (!params || !params.length) {

@@ -3,8 +3,8 @@ import RSVP from 'rsvp';
 import injectService from 'ember-service/inject';
 import {isEmberArray} from 'ember-array/utils';
 
-import ValidationEngine from 'ghost-admin/mixins/validation-engine';
-import {isVersionMismatchError} from 'ghost-admin/services/ajax';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
+import {isVersionMismatchError} from 'ideamarket-admin/services/ajax';
 
 const {Promise} = RSVP;
 

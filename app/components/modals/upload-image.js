@@ -1,8 +1,8 @@
 import computed from 'ember-computed';
 import injectService from 'ember-service/inject';
 import {isEmpty} from 'ember-utils';
-import ModalComponent from 'ghost-admin/components/modals/base';
-import cajaSanitizers from 'ghost-admin/utils/caja-sanitizers';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
+import cajaSanitizers from 'ideamarket-admin/utils/caja-sanitizers';
 
 export default ModalComponent.extend({
     model: null,

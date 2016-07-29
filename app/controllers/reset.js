@@ -2,7 +2,7 @@ import Controller from 'ember-controller';
 import computed from 'ember-computed';
 import injectService from 'ember-service/inject';
 
-import ValidationEngine from 'ghost-admin/mixins/validation-engine';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
 export default Controller.extend(ValidationEngine, {
     newPassword: '',

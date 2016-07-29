@@ -1,7 +1,7 @@
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
-import ShortcutsRoute from 'ghost-admin/mixins/shortcuts-route';
-import isNumber from 'ghost-admin/utils/isNumber';
-import isFinite from 'ghost-admin/utils/isFinite';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
+import ShortcutsRoute from 'ideamarket-admin/mixins/shortcuts-route';
+import isNumber from 'ideamarket-admin/utils/isNumber';
+import isFinite from 'ideamarket-admin/utils/isFinite';
 
 export default AuthenticatedRoute.extend(ShortcutsRoute, {
     model(params) {

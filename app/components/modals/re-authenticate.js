@@ -2,9 +2,9 @@ import $ from 'jquery';
 import computed from 'ember-computed';
 import injectService from 'ember-service/inject';
 import {htmlSafe} from 'ember-string';
-import ModalComponent from 'ghost-admin/components/modals/base';
-import ValidationEngine from 'ghost-admin/mixins/validation-engine';
-import {isVersionMismatchError} from 'ghost-admin/services/ajax';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
+import {isVersionMismatchError} from 'ideamarket-admin/services/ajax';
 
 export default ModalComponent.extend(ValidationEngine, {
     validationType: 'signin',

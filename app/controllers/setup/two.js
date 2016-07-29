@@ -4,7 +4,7 @@ import injectService from 'ember-service/inject';
 import injectController from 'ember-controller/inject';
 import {isEmberArray} from 'ember-array/utils';
 
-import ValidationEngine from 'ghost-admin/mixins/validation-engine';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
 const {Promise} = RSVP;
 

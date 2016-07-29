@@ -1,7 +1,7 @@
 import Route from 'ember-route';
 import injectService from 'ember-service/inject';
 import EmberObject from 'ember-object';
-import styleBody from 'ghost-admin/mixins/style-body';
+import styleBody from 'ideamarket-admin/mixins/style-body';
 import Configuration from 'ember-simple-auth/configuration';
 import DS from 'ember-data';
 

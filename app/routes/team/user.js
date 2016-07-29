@@ -1,7 +1,7 @@
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
-import CurrentUserSettings from 'ghost-admin/mixins/current-user-settings';
-import styleBody from 'ghost-admin/mixins/style-body';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
+import CurrentUserSettings from 'ideamarket-admin/mixins/current-user-settings';
+import styleBody from 'ideamarket-admin/mixins/style-body';
 
 export default AuthenticatedRoute.extend(styleBody, CurrentUserSettings, {
     titleToken: 'Team - User',

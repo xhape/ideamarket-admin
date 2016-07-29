@@ -1,5 +1,5 @@
 import injectService from 'ember-service/inject';
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
 
 export default AuthenticatedRoute.extend({
     mediaQueries: injectService(),

@@ -2,7 +2,7 @@ import {reads} from 'ember-computed';
 import injectService from 'ember-service/inject';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import MobileIndexRoute from 'ghost-admin/routes/mobile-index-route';
+import MobileIndexRoute from 'ideamarket-admin/routes/mobile-index-route';
 
 export default MobileIndexRoute.extend(AuthenticatedRouteMixin, {
     noPosts: false,

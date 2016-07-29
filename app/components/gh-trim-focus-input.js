@@ -1,6 +1,6 @@
 /*global device*/
 import computed from 'ember-computed';
-import GhostInput from 'ghost-admin/components/gh-input';
+import GhostInput from 'ideamarket-admin/components/gh-input';
 
 /**
  * This doesn't override the OneWayInput component because

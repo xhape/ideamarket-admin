@@ -1,8 +1,8 @@
 import Component from 'ember-component';
 import RSVP from 'rsvp';
 import injectService from 'ember-service/inject';
-import boundOneWay from 'ghost-admin/utils/bound-one-way';
-import {formatDate} from 'ghost-admin/utils/date-formatting';
+import boundOneWay from 'ideamarket-admin/utils/bound-one-way';
+import {formatDate} from 'ideamarket-admin/utils/date-formatting';
 import {InvokeActionMixin} from 'ember-invoke-action';
 
 export default Component.extend(InvokeActionMixin, {

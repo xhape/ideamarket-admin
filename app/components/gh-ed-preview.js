@@ -3,7 +3,7 @@ import Component from 'ember-component';
 import EmberObject from 'ember-object';
 import run from 'ember-runloop';
 import {A as emberA} from 'ember-array/utils';
-import {formatMarkdown} from 'ghost-admin/helpers/gh-format-markdown';
+import {formatMarkdown} from 'ideamarket-admin/helpers/gh-format-markdown';
 
 // ember-cli-shims doesn't export uuid
 const {uuid} = Ember;

@@ -1,5 +1,5 @@
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
-import base from 'ghost-admin/mixins/editor-base-route';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
+import base from 'ideamarket-admin/mixins/editor-base-route';
 
 export default AuthenticatedRoute.extend(base, {
     titleToken: 'Editor',

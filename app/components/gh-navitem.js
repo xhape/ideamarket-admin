@@ -1,7 +1,7 @@
 import Component from 'ember-component';
 import computed, {alias, readOnly} from 'ember-computed';
 import run from 'ember-runloop';
-import ValidationState from 'ghost-admin/mixins/validation-state';
+import ValidationState from 'ideamarket-admin/mixins/validation-state';
 import SortableItem from 'ember-sortable/mixins/sortable-item';
 
 export default Component.extend(ValidationState, SortableItem, {

@@ -6,9 +6,9 @@ import {isEmberArray} from 'ember-array/utils';
 
 import AuthConfiguration from 'ember-simple-auth/configuration';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-import ShortcutsRoute from 'ghost-admin/mixins/shortcuts-route';
-import ctrlOrCmd from 'ghost-admin/utils/ctrl-or-cmd';
-import windowProxy from 'ghost-admin/utils/window-proxy';
+import ShortcutsRoute from 'ideamarket-admin/mixins/shortcuts-route';
+import ctrlOrCmd from 'ideamarket-admin/utils/ctrl-or-cmd';
+import windowProxy from 'ideamarket-admin/utils/window-proxy';
 
 function K() {
     return this;

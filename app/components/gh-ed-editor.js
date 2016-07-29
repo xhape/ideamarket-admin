@@ -1,8 +1,8 @@
 import TextArea from 'ember-components/text-area';
 import run from 'ember-runloop';
-import EditorAPI from 'ghost-admin/mixins/ed-editor-api';
-import EditorShortcuts from 'ghost-admin/mixins/ed-editor-shortcuts';
-import EditorScroll from 'ghost-admin/mixins/ed-editor-scroll';
+import EditorAPI from 'ideamarket-admin/mixins/ed-editor-api';
+import EditorShortcuts from 'ideamarket-admin/mixins/ed-editor-shortcuts';
+import EditorScroll from 'ideamarket-admin/mixins/ed-editor-scroll';
 import {InvokeActionMixin} from 'ember-invoke-action';
 
 export default TextArea.extend(EditorAPI, EditorShortcuts, EditorScroll, InvokeActionMixin, {

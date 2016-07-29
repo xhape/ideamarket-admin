@@ -1,6 +1,6 @@
 import {alias} from 'ember-computed';
 import injectService from 'ember-service/inject';
-import ModalComponent from 'ghost-admin/components/modals/base';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
 
 export default ModalComponent.extend({
 

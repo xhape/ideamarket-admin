@@ -9,7 +9,7 @@ import {dasherize} from 'ember-string';
 import {
     isMaintenanceError,
     isVersionMismatchError
-} from 'ghost-admin/services/ajax';
+} from 'ideamarket-admin/services/ajax';
 
 // Notification keys take the form of "noun.verb.message", eg:
 //

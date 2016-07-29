@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ApplicationSerializer from 'ghost-admin/serializers/application';
+import ApplicationSerializer from 'ideamarket-admin/serializers/application';
 
 const {String: {pluralize}} = Ember;
 

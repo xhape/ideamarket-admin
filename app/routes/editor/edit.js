@@ -1,8 +1,8 @@
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
-import base from 'ghost-admin/mixins/editor-base-route';
-import isNumber from 'ghost-admin/utils/isNumber';
-import isFinite from 'ghost-admin/utils/isFinite';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
+import base from 'ideamarket-admin/mixins/editor-base-route';
+import isNumber from 'ideamarket-admin/utils/isNumber';
+import isFinite from 'ideamarket-admin/utils/isFinite';
 
 export default AuthenticatedRoute.extend(base, {
     titleToken: 'Editor',

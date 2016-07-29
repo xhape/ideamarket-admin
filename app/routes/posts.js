@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import AuthenticatedRoute from 'ghost-admin/routes/authenticated';
-import ShortcutsRoute from 'ghost-admin/mixins/shortcuts-route';
-import PaginationMixin from 'ghost-admin/mixins/pagination';
+import AuthenticatedRoute from 'ideamarket-admin/routes/authenticated';
+import ShortcutsRoute from 'ideamarket-admin/mixins/shortcuts-route';
+import PaginationMixin from 'ideamarket-admin/mixins/pagination';
 
 export default AuthenticatedRoute.extend(ShortcutsRoute, PaginationMixin, {
     titleToken: 'Content',

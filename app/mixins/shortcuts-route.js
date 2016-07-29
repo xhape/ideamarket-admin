@@ -1,5 +1,5 @@
 import Mixin from 'ember-metal/mixin';
-import ShortcutsMixin from 'ghost-admin/mixins/shortcuts';
+import ShortcutsMixin from 'ideamarket-admin/mixins/shortcuts';
 
 /**
  * Only routes can implement shortcuts.

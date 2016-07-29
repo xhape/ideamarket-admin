@@ -2,7 +2,7 @@ import Component from 'ember-component';
 import computed from 'ember-computed';
 import injectService from 'ember-service/inject';
 import run from 'ember-runloop';
-import DropdownMixin from 'ghost-admin/mixins/dropdown-mixin';
+import DropdownMixin from 'ideamarket-admin/mixins/dropdown-mixin';
 
 export default Component.extend(DropdownMixin, {
     classNames: 'dropdown',

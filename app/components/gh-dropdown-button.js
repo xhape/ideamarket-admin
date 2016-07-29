@@ -1,6 +1,6 @@
 import Component from 'ember-component';
 import injectService from 'ember-service/inject';
-import DropdownMixin from 'ghost-admin/mixins/dropdown-mixin';
+import DropdownMixin from 'ideamarket-admin/mixins/dropdown-mixin';
 
 export default Component.extend(DropdownMixin, {
     tagName: 'button',

@@ -6,9 +6,9 @@ import {htmlSafe} from 'ember-string';
 import run from 'ember-runloop';
 import {isEmberArray} from 'ember-array/utils';
 
-import isNumber from 'ghost-admin/utils/isNumber';
-import boundOneWay from 'ghost-admin/utils/bound-one-way';
-import { invoke } from 'ember-invoke-action';
+import isNumber from 'ideamarket-admin/utils/isNumber';
+import boundOneWay from 'ideamarket-admin/utils/bound-one-way';
+import { invoke } from 'ideamarket-invoke-action';
 
 export default Controller.extend({
     submitting: false,

@@ -3,9 +3,9 @@ import Mixin from 'ember-metal/mixin';
 import RSVP from 'rsvp';
 import run from 'ember-runloop';
 
-import ShortcutsRoute from 'ghost-admin/mixins/shortcuts-route';
-import styleBody from 'ghost-admin/mixins/style-body';
-import ctrlOrCmd from 'ghost-admin/utils/ctrl-or-cmd';
+import ShortcutsRoute from 'ideamarket-admin/mixins/shortcuts-route';
+import styleBody from 'ideamarket-admin/mixins/style-body';
+import ctrlOrCmd from 'ideamarket-admin/utils/ctrl-or-cmd';
 
 let generalShortcuts = {};
 generalShortcuts[`${ctrlOrCmd}+alt+p`] = 'publish';

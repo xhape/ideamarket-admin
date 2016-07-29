@@ -1,8 +1,8 @@
 import Router from 'ember-router';
 import injectService from 'ember-service/inject';
 import on from 'ember-evented/on';
-import ghostPaths from 'ghost-admin/utils/ghost-paths';
-import documentTitle from 'ghost-admin/utils/document-title';
+import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
+import documentTitle from 'ideamarket-admin/utils/document-title';
 import config from './config/environment';
 
 const GhostRouter = Router.extend({

@@ -1,5 +1,5 @@
 import {helper} from 'ember-helper';
-import counter from 'ghost-admin/utils/word-count';
+import counter from 'ideamarket-admin/utils/word-count';
 
 export default helper(function (params) {
     if (!params || !params.length) {

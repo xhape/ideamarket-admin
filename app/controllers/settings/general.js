@@ -3,8 +3,8 @@ import computed from 'ember-computed';
 import injectService from 'ember-service/inject';
 import observer from 'ember-metal/observer';
 import run from 'ember-runloop';
-import SettingsSaveMixin from 'ghost-admin/mixins/settings-save';
-import randomPassword from 'ghost-admin/utils/random-password';
+import SettingsSaveMixin from 'ideamarket-admin/mixins/settings-save';
+import randomPassword from 'ideamarket-admin/utils/random-password';
 
 export default Controller.extend(SettingsSaveMixin, {
 

@@ -5,7 +5,7 @@ import {htmlSafe} from 'ember-string';
 import computed, {alias, equal} from 'ember-computed';
 import injectService from 'ember-service/inject';
 
-import ActiveLinkWrapper from 'ghost-admin/mixins/active-link-wrapper';
+import ActiveLinkWrapper from 'ideamarket-admin/mixins/active-link-wrapper';
 import {invokeAction} from 'ember-invoke-action';
 
 // ember-cli-shims doesn't export these
