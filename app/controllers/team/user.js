@@ -8,7 +8,7 @@ import {isEmberArray} from 'ember-array/utils';
 
 import isNumber from 'ideamarket-admin/utils/isNumber';
 import boundOneWay from 'ideamarket-admin/utils/bound-one-way';
-import { invoke } from 'ideamarket-invoke-action';
+import { invoke } from 'ember-invoke-action';
 
 export default Controller.extend({
     submitting: false,
