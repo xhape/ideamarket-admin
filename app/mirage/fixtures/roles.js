@@ -21,16 +21,6 @@ export default [
         updated_by: 1
     },
     {
-        id: 3,
-        uuid: 'de481b62-63f8-42c7-b5b9-6c5f5a877f53',
-        name: 'Author',
-        description: 'Authors',
-        created_at: '2015-11-13T16:01:29.131Z',
-        created_by: 1,
-        updated_at: '2015-11-13T16:01:29.131Z',
-        updated_by: 1
-    },
-    {
         id: 4,
         uuid: 'ac8cbaf6-e6be-4129-b0fb-ec9ddfa61056',
         name: 'Owner',
