@@ -39,5 +39,35 @@ export default [
         created_by: 1,
         updated_at: '2015-11-13T16:01:29.132Z',
         updated_by: 1
+    },
+    {
+        id: 5,
+        uuid: '6105ab10-ce46-4af1-bf09-410c57a02ecb',
+        name: 'Ideator',
+        description: 'Idea Creators',
+        created_at: '2015-11-13T16:01:29.132Z',
+        created_by: 1,
+        updated_at: '2015-11-13T16:01:29.132Z',
+        updated_by: 1
+    },
+    {
+        id: 6,
+        uuid: '9cda7125-fe2b-45d2-864d-5e5c3abc1087',
+        name: 'Builder',
+        description: 'Developers, Designers, QA, Project Manager',
+        created_at: '2015-11-13T16:01:29.132Z',
+        created_by: 1,
+        updated_at: '2015-11-13T16:01:29.132Z',
+        updated_by: 1
+    },
+    {
+        id: 7,
+        uuid: '5fdf3e01-5cfd-40dc-ab2e-2e71e5373196',
+        name: 'Brand Owner',
+        description: 'Brand Owners',
+        created_at: '2015-11-13T16:01:29.132Z',
+        created_by: 1,
+        updated_at: '2015-11-13T16:01:29.132Z',
+        updated_by: 1
     }
 ];

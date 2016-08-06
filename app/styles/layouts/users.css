@@ -166,6 +166,20 @@ a.user-list-item {
     color: rgba(255, 255, 255, 0.8);
 }
 
+.role-label.ideator {
+    background: var(--orange);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.role-label.builder {
+    background: var(--green);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.role-label.brand.owner {
+    background: var(--green);
+    color: rgba(255, 255, 255, 0.8);
+}
 
 /* User invitation modal
 /* ---------------------------------------------------------- */
