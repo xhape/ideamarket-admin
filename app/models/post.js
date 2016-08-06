@@ -77,6 +77,7 @@ export default Model.extend(Comparable, ValidationEngine, {
     language: attr('string', {defaultValue: 'en_US'}),
     metaTitle: attr('string'),
     metaDescription: attr('string'),
+    visibility: attr('string', {defaultValue: 'private'}),
     author: belongsTo('user', {async: true}),
     authorId: attr('number'),
     updatedAtUTC: attr('moment-utc'),
