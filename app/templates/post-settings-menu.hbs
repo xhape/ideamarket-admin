@@ -62,9 +62,9 @@
                     plugins="remove_button, drag_drop"}}
             </div>
 
-            {{#unless session.user.isAuthor}}
+            {{#if (gh-user-can-admin session.user)}}
             <div class="form-group for-select">
-                <label for="author-list">Author</label>
+                <label for="author-list">Ideator</label>
                 <span class="input-icon icon-user">
                     <span class="gh-select" tabindex="0">
                     {{gh-select-native
@@ -79,7 +79,7 @@
                     </span>
                 </span>
             </div>
-            {{/unless}}
+            {{/if}}
 
             <ul class="nav-list nav-list-block">
                 {{#gh-tab tagName="li" classNames="nav-list-item"}}
@@ -91,6 +91,7 @@
                 {{/gh-tab}}
             </ul>
 
+            {{#if (gh-user-can-admin session.user)}}
             <div class="form-group for-checkbox">
                 <label class="checkbox" for="static-page" {{action "togglePage" bubbles="false"}}>
                     {{one-way-checkbox model.page type="checkbox" name="static-page" id="static-page" class="gh-input post-setting-static-page" update=(action (mut model.page))}}
@@ -104,6 +105,7 @@
                     <p>Feature this post</p>
                 </label>
             </div>
+            {{/if}}
 
             </form>
         </div>{{! .settings-menu-content }}

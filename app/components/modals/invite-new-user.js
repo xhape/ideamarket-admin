@@ -26,7 +26,7 @@ export default ModalComponent.extend(ValidationEngine, {
         // populate roles and set initial value for the dropdown
         run.schedule('afterRender', this, function () {
             this.get('store').query('role', {permissions: 'assign'}).then((roles) => {
-                let authorRole = roles.findBy('name', 'Author');
+                let authorRole = roles.findBy('name', 'Ideator');
 
                 this.set('roles', roles);
                 this.set('authorRole', authorRole);

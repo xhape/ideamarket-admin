@@ -30,8 +30,8 @@ export default MobileIndexRoute.extend(AuthenticatedRouteMixin, {
 
         return this.get('session.user').then((user) => {
             post = posts.find(function (post) {
-                // Authors can only see posts they've written
-                if (user.get('isAuthor')) {
+                // Ideators, Builders, and Brand Owners can only see ideas they've written
+                if (user.get('isIdeator') || user.get('isBuilder') || user.get('isBrandOwner')) {
                     return post.isAuthoredByUser(user);
                 }
 

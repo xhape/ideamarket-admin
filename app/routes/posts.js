@@ -16,7 +16,7 @@ export default AuthenticatedRoute.extend(ShortcutsRoute, PaginationMixin, {
         let paginationSettings = this.get('paginationSettings');
 
         return this.get('session.user').then((user) => {
-            if (user.get('isAuthor')) {
+            if (user.get('Ideator') || user.get('Builder') || user.get('Brand Owner')) {
                 paginationSettings.filter = paginationSettings.filter ?
                     `${paginationSettings.filter}+author:${user.get('slug')}` : `author:${user.get('slug')}`;
             }
@@ -25,7 +25,7 @@ export default AuthenticatedRoute.extend(ShortcutsRoute, PaginationMixin, {
                 // using `.filter` allows the template to auto-update when new models are pulled in from the server.
                 // we just need to 'return true' to allow all models by default.
                 return this.store.filter('post', (post) => {
-                    if (user.get('isAuthor')) {
+                    if (user.get('Ideator') || user.get('Builder') || user.get('Brand Owner')) {
                         return post.isAuthoredByUser(user);
                     }
 

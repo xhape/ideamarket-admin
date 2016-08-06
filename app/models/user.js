@@ -43,6 +43,9 @@ export default Model.extend(ValidationEngine, {
     // TODO: Once client-side permissions are in place,
     // remove the hard role check.
     isAuthor: equal('role.name', 'Author'),
+    isIdeator: equal('role.name', 'Ideator'),
+    isBuilder: equal('role.name', 'Builder'),
+    isBrandOwner: equal('role.name', 'Brand Owner'),
     isEditor: equal('role.name', 'Editor'),
     isAdmin: equal('role.name', 'Administrator'),
     isOwner: equal('role.name', 'Owner'),
