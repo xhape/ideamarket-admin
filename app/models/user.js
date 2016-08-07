@@ -46,12 +46,18 @@ export default Model.extend(ValidationEngine, {
     isIdeator: equal('role.name', 'Ideator'),
     isBuilder: equal('role.name', 'Builder'),
     isBrandOwner: equal('role.name', 'Brand Owner'),
+
+    // IdeaMarket Team users
     isEditor: equal('role.name', 'Editor'),
     isAdmin: equal('role.name', 'Administrator'),
     isOwner: equal('role.name', 'Owner'),
 
     isLoggedIn: computed('id', 'session.user.id', function () {
         return this.get('id') === this.get('session.user.id');
+    }),
+
+    isIdeaMarketTeam: computed('role.name', function () {
+        return ['Editor', 'Administrator', 'Owner'].indexOf(this.get('role.name')) > -1;
     }),
 
     active: computed('status', function () {

@@ -10,9 +10,9 @@
     <span class="description">Last seen: {{component.lastLoginUTC}}</span>
 </div>
 <aside class="user-list-item-aside">
-    {{#unless session.user.isAuthor}}
+    {{#if session.user.isIdeaMarketTeam}}
         {{#each user.roles as |role|}}
             <span class="role-label {{role.lowerCaseName}}">{{role.name}}</span>
         {{/each}}
-    {{/unless}}
+    {{/if}}
 </aside>

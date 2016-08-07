@@ -1,8 +1,8 @@
 <section class="gh-view">
     <header class="view-header">
         {{#gh-view-title openMobileMenu="openMobileMenu"}}<span>Team</span>{{/gh-view-title}}
-        {{!-- Do not show Invite user button to authors --}}
-        {{#unless session.user.isAuthor}}
+        {{!-- Only show Invite user button to IdeMarket Team --}}
+        {{#if session.user.isIdeaMarketTeam}}
             <section class="view-actions">
                 <button class="btn btn-green" {{action "toggleInviteUserModal"}} >Invite People</button>
             </section>
@@ -12,7 +12,7 @@
                                       close=(action "toggleInviteUserModal")
                                       modifier="action"}}
             {{/if}}
-        {{/unless}}
+        {{/if}}
     </header>
 
     {{#gh-infinite-scroll
@@ -21,8 +21,8 @@
         tagName="section"
         classNames="view-content team"
     }}
-        {{!-- Do not show invited users to authors --}}
-        {{#unless session.user.isAuthor}}
+        {{!-- Only show invited users to IdeaMarket Team --}}
+        {{#if session.user.isIdeaMarketTeam}}
             {{#if invitedUsers}}
                 <section class="user-list invited-users">
                     <h4 class="user-list-title">Invited users</h4>
@@ -59,13 +59,13 @@
                     {{/each}}
                 </section>
             {{/if}}
-        {{/unless}}
+        {{/if}}
 
         <section class="user-list active-users">
             <h4 class="user-list-title">Active users</h4>
             {{#each activeUsers key="id" as |user|}}
-                {{!-- For authors only shows users as a list, otherwise show users with links to user page --}}
-                {{#unless session.user.isAuthor}}
+                {{!-- For non-IdeaMarket Team user only shows users as a list, otherwise show users with links to user page --}}
+                {{#if session.user.isIdeaMarketTeam}}
                     {{#gh-user-active user=user as |component|}}
                         {{#link-to 'team.user' user.slug class="user-list-item"}}
                             {{partial 'user-list-item'}}
@@ -75,7 +75,7 @@
                     {{#gh-user-active user=user as |component|}}
                         <li class="ember-view active user-list-item">{{partial 'user-list-item'}}</li>
                     {{/gh-user-active}}
-                {{/unless}}
+                {{/if}}
             {{/each}}
         </section>
     {{/gh-infinite-scroll}}
