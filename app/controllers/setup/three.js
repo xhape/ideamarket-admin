@@ -129,9 +129,9 @@ export default Controller.extend({
         }
     }),
 
-    authorRole: computed(function () {
+    ideatorRole: computed(function () {
         return this.store.findAll('role', {reload: true}).then((roles) => {
-            return roles.findBy('name', 'Author');
+            return roles.findBy('name', 'Ideator');
         });
     }),
 
@@ -161,13 +161,13 @@ export default Controller.extend({
                     this._transitionAfterSubmission();
                 }, 4000);
 
-                this.get('authorRole').then((authorRole) => {
+                this.get('ideatorRole').then((ideatorRole) => {
                     RSVP.Promise.all(
                         users.map((user) => {
                             let newUser = this.store.createRecord('user', {
                                 email: user,
                                 status: 'invited',
-                                role: authorRole
+                                role: ideatorRole
                             });
 
                             return newUser.save().then(() => {

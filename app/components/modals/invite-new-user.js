@@ -12,7 +12,7 @@ export default ModalComponent.extend(ValidationEngine, {
 
     role: null,
     roles: null,
-    authorRole: null,
+    ideatorRole: null,
     submitting: false,
 
     validationType: 'inviteUser',
@@ -26,13 +26,13 @@ export default ModalComponent.extend(ValidationEngine, {
         // populate roles and set initial value for the dropdown
         run.schedule('afterRender', this, function () {
             this.get('store').query('role', {permissions: 'assign'}).then((roles) => {
-                let authorRole = roles.findBy('name', 'Ideator');
+                let ideatorRole = roles.findBy('name', 'Ideator');
 
                 this.set('roles', roles);
-                this.set('authorRole', authorRole);
+                this.set('ideatorRole', ideatorRole);
 
                 if (!this.get('role')) {
-                    this.set('role', authorRole);
+                    this.set('role', ideatorRole);
                 }
             });
         });
