@@ -2,22 +2,22 @@
 <div id="entry-controls">
     <div class="{{if isViewingSubview 'settings-menu-pane-out-left' 'settings-menu-pane-in'}} settings-menu settings-menu-pane">
         <div class="settings-menu-header">
-            <h4>Post Settings</h4>
+            <h4>Idea Settings</h4>
             <button class="close icon-x settings-menu-header-action" {{action "closeMenus"}}><span class="hidden">Close</span></button>
         </div>
         <div class="settings-menu-content">
             {{gh-image-uploader-with-preview
                 image=model.image
-                text="Add post image"
+                text="Add idea image"
                 update=(action "setCoverImage")
                 remove=(action "clearCoverImage")
             }}
             <form>
             <div class="form-group">
-                <label for="url">Post URL</label>
+                <label for="url">Idea URL</label>
                 {{#if model.isPublished}}
                 <a class="post-view-link" target="_blank" href="{{model.absoluteUrl}}">
-                    View post <i class="icon-external"></i>
+                    View idea <i class="icon-external"></i>
                 </a>
                 {{else}}
                 <a class="post-view-link" target="_blank" href="{{model.previewUrl}}">
@@ -96,13 +96,13 @@
                 <label class="checkbox" for="static-page" {{action "togglePage" bubbles="false"}}>
                     {{one-way-checkbox model.page type="checkbox" name="static-page" id="static-page" class="gh-input post-setting-static-page" update=(action (mut model.page))}}
                     <span class="input-toggle-component"></span>
-                    <p>Turn this post into a static page</p>
+                    <p>Turn this idea into a static page</p>
                 </label>
 
                 <label class="checkbox" for="featured" {{action "toggleFeatured" bubbles="false"}}>
                     {{one-way-checkbox model.featured type="checkbox" name="featured" id="featured" class="gh-input post-setting-featured" update=(action (mut model.featured))}}
                     <span class="input-toggle-component"></span>
-                    <p>Feature this post</p>
+                    <p>Feature this idea</p>
                 </label>
             </div>
             {{/if}}
