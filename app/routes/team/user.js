@@ -25,8 +25,6 @@ export default AuthenticatedRoute.extend(styleBody, CurrentUserSettings, {
 
             if (!isIdeaMarketTeam && !isOwnProfile) {
                 this.transitionTo('team.user', currentUser);
-            } else if (isIdeaMarketTeam && !isOwnProfile) {
-                this.transitionTo('team');
             }
         });
     },
