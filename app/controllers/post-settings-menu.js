@@ -198,7 +198,7 @@ export default Controller.extend(SettingsMenuMixin, {
     }),
 
     initializeSelectedVisibility: observer('model', function () {
-        this.set('selectedAuthor', this.get('model.visibility'));
+        this.set('selectedVisibility', this.get('model.visibility'));
     }),
 
     showError(error) {
@@ -497,6 +497,7 @@ export default Controller.extend(SettingsMenuMixin, {
         },
 
         changeVisibility(newVisibility) {
+            console.log(newVisibility);
             let visibility = this.get('model.visibility');
             let model = this.get('model');
 
