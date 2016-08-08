@@ -23,6 +23,8 @@
                                     {{#if component.isPublished}}
                                         {{#if post.page}}
                                             <span class="page">Page</span>
+                                        {{else if post.isPrivate}}
+                                            <span class="page">Private</span>
                                         {{else}}
                                             <time datetime="{{post.publishedAtUTC}}" class="date published">
                                                 Published {{gh-format-timeago post.publishedAtUTC}}

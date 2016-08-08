@@ -124,6 +124,10 @@ export default Model.extend(Comparable, ValidationEngine, {
     internalTags: filterBy('tags', 'isInternal', true),
     isScheduled: equal('status', 'scheduled'),
 
+    isPublic: equal('visibility', 'public'),
+    isPrivate: equal('visibility', 'private'),
+    isProtected: equal('visibility', 'protected'),
+
     // TODO: move this into gh-posts-list-item component
     // Checks every second, if we reached the scheduled date
     timeScheduled: computed('publishedAtUTC', 'clock.second', function () {
