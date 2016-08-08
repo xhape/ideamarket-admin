@@ -23,6 +23,7 @@ export default Controller.extend(SettingsMenuMixin, {
     debounceId: null,
     lastPromise: null,
     selectedAuthor: null,
+    selectedVisibility: null,
 
     application: injectController(),
     config: injectService(),
@@ -54,6 +55,19 @@ export default Controller.extend(SettingsMenuMixin, {
         return ArrayProxy
             .extend(PromiseProxyMixin)
             .create(deferred);
+    }),
+
+    visibilities: computed(function () {
+        return [{
+            value : 'public',
+            label: 'Public'
+        }, {
+            value : 'private',
+            label: 'Private'
+        }, {
+            value : 'protected',
+            label: 'Protected'
+        }];
     }),
 
     slugValue: boundOneWay('model.slug'),
@@ -181,6 +195,10 @@ export default Controller.extend(SettingsMenuMixin, {
         return this.get('store').filter('tag', {limit: 'all'}, () => {
             return true;
         });
+    }),
+
+    initializeSelectedVisibility: observer('model', function () {
+        this.set('selectedAuthor', this.get('model.visibility'));
     }),
 
     showError(error) {
@@ -476,6 +494,29 @@ export default Controller.extend(SettingsMenuMixin, {
                 this.set('selectedAuthor', author);
                 model.rollbackAttributes();
             });
+        },
+
+        changeVisibility(newVisibility) {
+            let visibility = this.get('model.visibility');
+            let model = this.get('model');
+
+            // return if nothing changed
+            if (newVisibility === visibility) {
+                return;
+            }
+
+            model.set('visibility', newVisibility);
+
+            // if this is a new post (never been saved before), don't try to save it
+            if (this.get('model.isNew')) {
+                return;
+            }
+
+            model.save().catch((error) => {
+                this.showError(error);
+            this.set('selectedVisibility', visibility);
+            model.rollbackAttributes();
+        });
         },
 
         addTag(tagName, index) {
