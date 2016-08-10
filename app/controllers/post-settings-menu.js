@@ -10,6 +10,7 @@ import {htmlSafe} from 'ember-string';
 import {isBlank} from 'ember-utils';
 import observer from 'ember-metal/observer';
 import run from 'ember-runloop';
+import _ from 'lodash';
 
 import {parseDateString} from 'ideamarket-admin/utils/date-formatting';
 import SettingsMenuMixin from 'ideamarket-admin/mixins/settings-menu-controller';
