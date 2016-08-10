@@ -57,18 +57,7 @@ export default Controller.extend(SettingsMenuMixin, {
             .create(deferred);
     }),
 
-    visibilities: computed(function () {
-        return [{
-            value : 'public',
-            label: 'Public'
-        }, {
-            value : 'private',
-            label: 'Private'
-        }, {
-            value : 'protected',
-            label: 'Protected'
-        }];
-    }),
+    visibilities: [{value: 'public',label: 'Public'}, {value: 'private',label: 'Private'}, {value: 'protected',label: 'Protected'}],
 
     slugValue: boundOneWay('model.slug'),
 
@@ -197,8 +186,14 @@ export default Controller.extend(SettingsMenuMixin, {
         });
     }),
 
-    initializeSelectedVisibility: observer('model', function () {
-        this.set('selectedVisibility', this.get('model.visibility'));
+    initializeSelectedVisibility: observer('model', 'visibilities', function () {
+        let visibility = this.get('model.visibility');
+        let selectedVisibility = _.find(this.get('visibilities'), function(option) {
+            if (option.value == visibility) {
+                return option;
+            }
+        });
+        this.set('selectedVisibility', selectedVisibility);
     }),
 
     showError(error) {
@@ -497,16 +492,15 @@ export default Controller.extend(SettingsMenuMixin, {
         },
 
         changeVisibility(newVisibility) {
-            console.log(newVisibility);
             let visibility = this.get('model.visibility');
             let model = this.get('model');
 
             // return if nothing changed
-            if (newVisibility === visibility) {
+            if (newVisibility.value === visibility) {
                 return;
             }
 
-            model.set('visibility', newVisibility);
+            model.set('visibility', newVisibility.value);
 
             // if this is a new post (never been saved before), don't try to save it
             if (this.get('model.isNew')) {
@@ -515,8 +509,8 @@ export default Controller.extend(SettingsMenuMixin, {
 
             model.save().catch((error) => {
                 this.showError(error);
-            this.set('selectedVisibility', visibility);
-            model.rollbackAttributes();
+                this.set('selectedVisibility', visibility);
+                model.rollbackAttributes();
         });
         },
 

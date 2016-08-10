@@ -25,6 +25,8 @@
                                             <span class="page">Page</span>
                                         {{else if post.isPrivate}}
                                             <span class="page">Private</span>
+                                        {{else if post.isProtected}}
+                                            <span class="page">Protected</span>
                                         {{else}}
                                             <time datetime="{{post.publishedAtUTC}}" class="date published">
                                                 Published {{gh-format-timeago post.publishedAtUTC}}
