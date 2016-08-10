@@ -26,7 +26,6 @@ export default AuthenticatedRoute.extend(ShortcutsRoute, PaginationMixin, {
                 // we just need to 'return true' to allow all models by default.
                 return this.store.filter('post', (post) => {
                     if (user.get('isIdeator') || user.get('isBuilder') || user.get('isBrandOwner')) {
-                        console.log("isPostAuthored by User " + post.isAuthoredByUser(user));
                         return post.isAuthoredByUser(user);
                     }
 

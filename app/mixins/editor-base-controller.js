@@ -82,7 +82,7 @@ export default Mixin.create({
     }),
 
     postOrPage: computed('model.page', function () {
-        return this.get('model.page') ? 'Page' : 'Post';
+        return this.get('model.page') ? 'Page' : 'Idea';
     }),
 
     // countdown timer to show the time left until publish time for a scheduled post
