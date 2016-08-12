@@ -136,6 +136,7 @@ module.exports = function (defaults) {
     app.import('bower_components/jquery-file-upload/js/jquery.fileupload-image.js');
     app.import('bower_components/google-caja/html-css-sanitizer-bundle.js');
     app.import('bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js');
+    app.import('bower_components/lodash/lodash.js');
 
     if (app.env === 'test') {
         app.import(app.bowerDirectory + '/jquery.simulate.drag-sortable/jquery.simulate.drag-sortable.js', {type: 'test'});
