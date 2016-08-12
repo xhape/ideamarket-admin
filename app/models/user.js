@@ -4,8 +4,9 @@ import attr from 'ember-data/attr';
 import {hasMany} from 'ember-data/relationships';
 import computed, {equal} from 'ember-computed';
 import injectService from 'ember-service/inject';
-import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
+import {task} from 'ember-concurrency';
+import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 export default Model.extend(ValidationEngine, {
     validationType: 'user',
 
@@ -39,6 +40,7 @@ export default Model.extend(ValidationEngine, {
     ghostPaths: injectService(),
     ajax: injectService(),
     session: injectService(),
+    notifications: injectService(),
 
     // TODO: Once client-side permissions are in place,
     // remove the hard role check.
@@ -83,12 +85,20 @@ export default Model.extend(ValidationEngine, {
         }
     }),
 
-    saveNewPassword() {
-        let url = this.get('ghostPaths.url').api('users', 'password');
+    saveNewPassword: task(function* () {
         let validation = this.get('isLoggedIn') ? 'ownPasswordChange' : 'passwordChange';
 
-        return this.validate({property: validation}).then(() => {
-            return this.get('ajax').put(url, {
+        try {
+            yield this.validate({property: validation});
+        } catch (e) {
+            // validation error, don't do anything
+            return;
+        }
+
+        try {
+            let url = this.get('ghostPaths.url').api('users', 'password');
+
+            yield this.get('ajax').put(url, {
                 data: {
                     password: [{
                         user_id: this.get('id'),
@@ -98,8 +108,23 @@ export default Model.extend(ValidationEngine, {
                     }]
                 }
             });
-        });
-    },
+
+            this.setProperties({
+                password: '',
+                newPassword: '',
+                ne2Password: ''
+            });
+
+            this.get('notifications').showNotification('Password updated.', {type: 'success', key: 'user.change-password.success'});
+
+            // clear errors manually for ne2password because validation
+            // engine only clears the "validated proeprty"
+            // TODO: clean up once we have a better validations library
+            this.get('errors').remove('ne2Password');
+        } catch (error) {
+            this.get('notifications').showAPIError(error, {key: 'user.change-password'});
+        }
+    }).drop(),
 
     resendInvite() {
         let fullUserData = this.toJSON();
