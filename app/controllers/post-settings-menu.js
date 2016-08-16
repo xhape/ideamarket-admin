@@ -19,6 +19,7 @@ const {ArrayProxy, Handlebars, PromiseProxyMixin} = Ember;
 export default Controller.extend(SettingsMenuMixin, {
     selectedAuthor: null,
     selectedVisibility: null,
+    selectedVisibilityDescription: null,
 
     application: injectController(),
     config: injectService(),
@@ -51,7 +52,11 @@ export default Controller.extend(SettingsMenuMixin, {
             .create(deferred);
     }),
 
-    visibilities: [{value: 'public',label: 'Public'}, {value: 'private',label: 'Private'}, {value: 'protected',label: 'Protected'}],
+    visibilities: [
+        {value: 'public',label: 'Public', description: 'Idea is visible to everyone including users not logged in to IdeaMarket and search engine.'},
+        {value: 'private',label: 'Private', description : 'Idea is only visible to you.'},
+        {value: 'protected',label: 'Protected', description : 'Idea is only visible to logged in user.'}
+    ],
 
     slugValue: boundOneWay('model.slug'),
     metaTitleScratch: boundOneWay('model.metaTitle'),
@@ -137,6 +142,11 @@ export default Controller.extend(SettingsMenuMixin, {
             }
         });
         this.set('selectedVisibility', selectedVisibility);
+    }),
+
+    selectedVisibilityChanged : observer('selectedVisibility', function () {
+        let visibility = this.get('selectedVisibility');
+        this.set('selectedVisibilityDescription', visibility.description);
     }),
 
     showError(error) {
@@ -444,6 +454,7 @@ export default Controller.extend(SettingsMenuMixin, {
             }
 
             model.set('visibility', newVisibility.value);
+            this.set('selectedVisibility', newVisibility);
 
             // if this is a new post (never been saved before), don't try to save it
             if (this.get('model.isNew')) {
