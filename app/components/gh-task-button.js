@@ -2,7 +2,7 @@ import {reads} from 'ember-computed';
 import {invokeAction} from 'ember-invoke-action';
 
 import SpinButton from './gh-spin-button';
-import layout from 'ghost-admin/templates/components/gh-spin-button';
+import layout from 'ideamarket-admin/templates/components/gh-spin-button';
 
 /**
  * Task Button works exactly like Spin button, but with one major difference:
