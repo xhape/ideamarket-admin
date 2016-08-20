@@ -53,7 +53,7 @@ export default Controller.extend(SettingsMenuMixin, {
     }),
 
     visibilities: [
-        {value: 'public',label: 'Public', description: 'Idea is visible to everyone including users not logged in to IdeaMarket. Search engine can crawl these ideas.'},
+        {value: 'public',label: 'Public', description: 'Idea is visible to everyone including users not logged in to IdeaMarket. Search engine can crawl this idea.'},
         {value: 'protected',label: 'Protected', description : 'Idea is only visible to logged in user.'},
         {value: 'private',label: 'Private', description : 'Idea is only visible to you and to the people you allow to view it.'}
     ],
