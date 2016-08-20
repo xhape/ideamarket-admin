@@ -12,7 +12,7 @@ export default BaseValidator.create({
     },
 
     slogan(model) {
-        let title = model.get('slogan');
+        let slogan = model.get('slogan');
 
         if (!validator.isLength(slogan, 0, 150)) {
             model.get('errors').add('title', 'Slogan is too long');

@@ -18,7 +18,7 @@
                 {{/gh-form-group}}
 
                 {{#gh-form-group errors=model.errors hasValidated=model.hasValidated property="slogan"}}
-                    <label for="blog-title">Slogan</label>
+                    <label for="blog-slogan">Slogan</label>
                     {{gh-input model.slogan id="blog-slogan" name="general[slogan]" type="text" focusOut=(action "validate" "title" target=model) update=(action (mut model.slogan))}}
                     {{gh-error-message errors=model.errors property="slogan"}}
                     <p>This will appear in the site banner</p>
