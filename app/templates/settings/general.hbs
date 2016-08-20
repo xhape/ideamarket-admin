@@ -17,12 +17,19 @@
                     <p>This will appear in the site title and other parts of the application</p>
                 {{/gh-form-group}}
 
+                {{#gh-form-group errors=model.errors hasValidated=model.hasValidated property="slogan"}}
+                    <label for="blog-title">Slogan</label>
+                    {{gh-input model.slogan id="blog-slogan" name="general[slogan]" type="text" focusOut=(action "validate" "title" target=model) update=(action (mut model.slogan))}}
+                    {{gh-error-message errors=model.errors property="slogan"}}
+                    <p>This will appear in the site banner</p>
+                {{/gh-form-group}}
+
                 {{#gh-form-group errors=model.errors hasValidated=model.hasValidated property="description" class="description-container"}}
-                    <label for="blog-description">Slogan</label>
+                    <label for="blog-description">Sub-Slogan</label>
                     {{gh-textarea id="blog-description" class="gh-input" name="general[description]" value=model.description focusOut=(action "validate" "description" target=model)}}
                     {{gh-error-message errors=model.errors property="description"}}
                     <p>
-                        A brief description of IdeaMarket
+                        A brief description of IdeaMarket. This will appear in the banner
                         {{gh-count-characters model.description}}
                     </p>
                 {{/gh-form-group}}

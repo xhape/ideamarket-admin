@@ -29,13 +29,6 @@
         </span>
         {{gh-error-message errors=errors property="password"}}
     {{/gh-form-group}}
-    {{#gh-form-group errors=errors hasValidated=hasValidated property="blogTitle"}}
-        <label for="blog-title">IdeaMarket title</label>
-        <span class="input-icon icon-content">
-            {{gh-input blogTitle tabindex="4" type="text" name="blog-title" placeholder="Eg. IdeaMarket" autocorrect="off" focusOut=(action "preValidate" "blogTitle") update=(action (mut blogTitle))}}
-        </span>
-        {{gh-error-message errors=errors property="blogTitle"}}
-    {{/gh-form-group}}
     {{#gh-spin-button type="submit" tabindex="5" class="btn btn-green btn-lg btn-block" action="setup" submitting=submitting autoWidth="false"}}
         Last step: Invite your team <i class="icon-chevron"></i>
     {{/gh-spin-button}}

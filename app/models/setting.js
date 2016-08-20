@@ -7,6 +7,7 @@ export default Model.extend(ValidationEngine, {
     validationType: 'setting',
 
     title: attr('string'),
+    slogan: attr('string'),
     description: attr('string'),
     logo: attr('string'),
     cover: attr('string'),

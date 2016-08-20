@@ -33,9 +33,6 @@ export default Route.extend(styleBody, {
                     return this.transitionTo('signin');
                 } else {
                     let controller = this.controllerFor('setup/two');
-                    if (setup.title) {
-                        controller.set('blogTitle', setup.title.replace(/&apos;/gim, '\''));
-                    }
 
                     if (setup.name) {
                         controller.set('name', setup.name.replace(/&apos;/gim, '\''));

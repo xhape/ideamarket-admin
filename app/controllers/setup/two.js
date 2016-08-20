@@ -10,7 +10,6 @@ const {Promise} = RSVP;
 
 export default Controller.extend(ValidationEngine, {
     size: 90,
-    blogTitle: null,
     name: null,
     email: '',
     password: null,
@@ -114,13 +113,10 @@ export default Controller.extend(ValidationEngine, {
                         setup: [{
                             name: data.name,
                             email: data.email,
-                            password: data.password,
-                            blogTitle: data.blogTitle
+                            password: data.password
                         }]
                     }
                 }).then((result) => {
-                    config.set('blogTitle', data.blogTitle);
-
                     // don't try to login again if we are already logged in
                     if (this.get('session.isAuthenticated')) {
                         return this.afterAuthentication(result);

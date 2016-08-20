@@ -1,12 +1,21 @@
 import BaseValidator from './base';
 
 export default BaseValidator.create({
-    properties: ['title', 'description', 'password', 'postsPerPage'],
+    properties: ['title', 'slogan', 'description', 'password', 'postsPerPage'],
     title(model) {
         let title = model.get('title');
 
-        if (!validator.isLength(title, 0, 150)) {
+        if (!validator.isLength(title, 0, 50)) {
             model.get('errors').add('title', 'Title is too long');
+            this.invalidate();
+        }
+    },
+
+    slogan(model) {
+        let title = model.get('slogan');
+
+        if (!validator.isLength(slogan, 0, 150)) {
+            model.get('errors').add('title', 'Slogan is too long');
             this.invalidate();
         }
     },
