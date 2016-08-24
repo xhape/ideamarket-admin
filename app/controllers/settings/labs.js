@@ -3,7 +3,7 @@ import Controller from 'ember-controller';
 import injectService from 'ember-service/inject';
 import {isBlank} from 'ember-utils';
 import {isEmberArray} from 'ember-array/utils';
-import {UnsupportedMediaTypeError} from 'ghost-admin/services/ajax';
+import {UnsupportedMediaTypeError} from 'ideamarket-admin/services/ajax';
 
 export default Controller.extend({
     uploadButtonText: 'Import',

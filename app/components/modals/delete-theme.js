@@ -1,4 +1,4 @@
-import ModalComponent from 'ghost-admin/components/modals/base';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
 import {alias} from 'ember-computed';
 import {invokeAction} from 'ember-invoke-action';
 

@@ -1,8 +1,8 @@
-import ModalComponent from 'ghost-admin/components/modals/base';
+import ModalComponent from 'ideamarket-admin/components/modals/base';
 import computed, {mapBy, or} from 'ember-computed';
 import {invokeAction} from 'ember-invoke-action';
-import ghostPaths from 'ghost-admin/utils/ghost-paths';
-import {UnsupportedMediaTypeError} from 'ghost-admin/services/ajax';
+import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
+import {UnsupportedMediaTypeError} from 'ideamarket-admin/services/ajax';
 import {isBlank} from 'ember-utils';
 import run from 'ember-runloop';
 import injectService from 'ember-service/inject';
