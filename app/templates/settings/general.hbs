@@ -46,9 +46,9 @@
 
                 {{#if showUploadLogoModal}}
                     {{gh-fullscreen-modal "upload-image"
-                                          model=(hash model=model imageProperty="logo")
-                                          close=(action "toggleUploadLogoModal")
-                                          modifier="action wide"}}
+                            model=(hash model=model imageProperty="logo")
+                            close=(action "toggleUploadLogoModal")
+                            modifier="action wide"}}
                 {{/if}}
             </div>
 
@@ -63,9 +63,9 @@
 
                 {{#if showUploadCoverModal}}
                     {{gh-fullscreen-modal "upload-image"
-                                          model=(hash model=model imageProperty="cover")
-                                          close=(action "toggleUploadCoverModal")
-                                          modifier="action wide"}}
+                            model=(hash model=model imageProperty="cover")
+                            close=(action "toggleUploadCoverModal")
+                            modifier="action wide"}}
                 {{/if}}
             </div>
 
@@ -85,22 +85,6 @@
                         <span class="input-toggle-component"></span>
                         <p>Include the date in the idea URLs</p>
                     </label>
-                </div>
-
-                <div class="form-group for-select">
-                    <label for="activeTheme">Theme</label>
-                    <span class="gh-select" data-select-text="{{selectedTheme.label}}" tabindex="0">
-                        {{gh-select-native
-                            id="activeTheme"
-                            name="general[activeTheme]"
-                            content=themes
-                            optionValuePath="name"
-                            optionLabelPath="label"
-                            selection=selectedTheme
-                            action="setTheme"
-                        }}
-                   </span>
-                    <p>Select a theme for IdeaMarket</p>
                 </div>
 
                 <div class="form-group">
@@ -143,6 +127,34 @@
                 {{/if}}
             </fieldset>
 
+            <div class="settings-themes">
+                <h3>Themes</h3>
+
+                {{gh-theme-table
+                        availableThemes=model.availableThemes
+                        activateTheme=(action "setTheme")
+                        downloadTheme=(action "downloadTheme")
+                        deleteTheme=(action "deleteTheme")}}
+
+                <div class="form-group">
+                    {{#link-to "settings.general.uploadtheme" class="btn btn-green"}}
+                        Upload a theme
+                    {{/link-to}}
+                </div>
+
+                {{#if showDeleteThemeModal}}
+                    {{gh-fullscreen-modal "delete-theme"
+                            model=(hash
+                                theme=themeToDelete
+                                download=(action "downloadTheme" themeToDelete)
+                            )
+                            close=(action "hideDeleteThemeModal")
+                            confirm=(action "deleteTheme")
+                            modifier="action wide"}}
+                {{/if}}
+            </div>
         </form>
     </section>
 </section>
+
+{{outlet}}

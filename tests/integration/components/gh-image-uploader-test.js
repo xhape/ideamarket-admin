@@ -12,6 +12,7 @@ import {createFile, fileUpload} from '../../helpers/file-upload';
 import $ from 'jquery';
 import run from 'ember-runloop';
 import Service from 'ember-service';
+import {UnsupportedMediaTypeError} from 'ghost-admin/services/ajax';
 
 const keyCodes = {
     enter: 13
@@ -144,7 +145,7 @@ describeComponent(
                 stubSuccessfulUpload(server);
 
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(server.handledRequests.length).to.equal(1);
@@ -160,7 +161,7 @@ describeComponent(
                 this.get('sessionService').set('isAuthenticated', true);
 
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     let [request] = server.handledRequests;
@@ -176,7 +177,7 @@ describeComponent(
                 stubSuccessfulUpload(server);
 
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(update.calledOnce).to.be.true;
@@ -192,10 +193,26 @@ describeComponent(
                 stubFailedUpload(server, 500);
 
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(update.calledOnce).to.be.false;
+                    done();
+                });
+            });
+
+            it('fires fileSelected action on file selection', function (done) {
+                let fileSelected = sinon.spy();
+                this.set('fileSelected', fileSelected);
+
+                stubSuccessfulUpload(server);
+
+                this.render(hbs`{{gh-image-uploader url=image fileSelected=(action fileSelected) update=(action update)}}`);
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
+
+                wait().then(() => {
+                    expect(fileSelected.calledOnce).to.be.true;
+                    expect(fileSelected.args[0]).to.not.be.blank;
                     done();
                 });
             });
@@ -207,7 +224,7 @@ describeComponent(
                 stubSuccessfulUpload(server);
 
                 this.render(hbs`{{gh-image-uploader image=image uploadStarted=(action uploadStarted) update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(uploadStarted.calledOnce).to.be.true;
@@ -222,7 +239,7 @@ describeComponent(
                 stubSuccessfulUpload(server);
 
                 this.render(hbs`{{gh-image-uploader image=image uploadFinished=(action uploadFinished) update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(uploadFinished.calledOnce).to.be.true;
@@ -237,7 +254,7 @@ describeComponent(
                 stubFailedUpload(server);
 
                 this.render(hbs`{{gh-image-uploader image=image uploadFinished=(action uploadFinished) update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(uploadFinished.calledOnce).to.be.true;
@@ -248,7 +265,7 @@ describeComponent(
             it('displays invalid file type error', function (done) {
                 stubFailedUpload(server, 415, 'UnsupportedMediaTypeError');
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
@@ -262,7 +279,7 @@ describeComponent(
             it('displays file too large for server error', function (done) {
                 stubFailedUpload(server, 413, 'RequestEntityTooLargeError');
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
@@ -276,7 +293,7 @@ describeComponent(
                     return [413, {}, ''];
                 });
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
@@ -288,7 +305,7 @@ describeComponent(
             it('displays other server-side error with message', function (done) {
                 stubFailedUpload(server, 400, 'UnknownError');
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
@@ -302,7 +319,7 @@ describeComponent(
                     return [500, {'Content-Type': 'application/json'}, ''];
                 });
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
@@ -318,7 +335,7 @@ describeComponent(
                 stubFailedUpload(server, 400, 'VersionMismatchError');
 
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(showAPIError.calledOnce).to.be.true;
@@ -332,7 +349,7 @@ describeComponent(
 
                 stubFailedUpload(server, 400, 'UnknownError');
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     expect(showAPIError.called).to.be.false;
@@ -343,7 +360,7 @@ describeComponent(
             it('can be reset after a failed upload', function (done) {
                 stubFailedUpload(server, 400, 'UnknownError');
                 this.render(hbs`{{gh-image-uploader image=image update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 wait().then(() => {
                     run(() => {
@@ -364,7 +381,7 @@ describeComponent(
                 stubSuccessfulUpload(server, 150);
 
                 this.render(hbs`{{gh-image-uploader image=image uploadFinished=(action done) update=(action update)}}`);
-                fileUpload(this.$('input[type="file"]'));
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
 
                 // after 75ms we should have had one progress event
                 run.later(this, function () {
@@ -402,7 +419,7 @@ describeComponent(
                 let uploadSuccess = sinon.spy();
                 let drop = $.Event('drop', {
                     dataTransfer: {
-                        files: [createFile()]
+                        files: [createFile(['test'], {type: 'image/png'})]
                     }
                 });
 
@@ -418,6 +435,80 @@ describeComponent(
                 wait().then(() => {
                     expect(uploadSuccess.calledOnce).to.be.true;
                     expect(uploadSuccess.firstCall.args[0]).to.equal('/content/images/test.png');
+                    done();
+                });
+            });
+
+            it('validates "accept" mime type by default', function (done) {
+                let uploadSuccess = sinon.spy();
+                let uploadFailed = sinon.spy();
+
+                this.set('uploadSuccess', uploadSuccess);
+                this.set('uploadFailed', uploadFailed);
+
+                stubSuccessfulUpload(server);
+
+                this.render(hbs`{{gh-image-uploader
+                    uploadSuccess=(action uploadSuccess)
+                    uploadFailed=(action uploadFailed)}}`);
+
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'application/plain'});
+
+                wait().then(() => {
+                    expect(uploadSuccess.called).to.be.false;
+                    expect(uploadFailed.calledOnce).to.be.true;
+                    expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
+                    expect(this.$('.failed').text()).to.match(/The image type you uploaded is not supported/);
+                    done();
+                });
+            });
+
+            it('uploads if validate action supplied and returns true', function (done) {
+                let validate = sinon.stub().returns(true);
+                let uploadSuccess = sinon.spy();
+
+                this.set('validate', validate);
+                this.set('uploadSuccess', uploadSuccess);
+
+                stubSuccessfulUpload(server);
+
+                this.render(hbs`{{gh-image-uploader
+                    uploadSuccess=(action uploadSuccess)
+                    validate=(action validate)}}`);
+
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'application/plain'});
+
+                wait().then(() => {
+                    expect(validate.calledOnce).to.be.true;
+                    expect(uploadSuccess.calledOnce).to.be.true;
+                    done();
+                });
+            });
+
+            it('skips upload and displays error if validate action supplied and doesn\'t return true', function (done) {
+                let validate = sinon.stub().returns(new UnsupportedMediaTypeError());
+                let uploadSuccess = sinon.spy();
+                let uploadFailed = sinon.spy();
+
+                this.set('validate', validate);
+                this.set('uploadSuccess', uploadSuccess);
+                this.set('uploadFailed', uploadFailed);
+
+                stubSuccessfulUpload(server);
+
+                this.render(hbs`{{gh-image-uploader
+                    uploadSuccess=(action uploadSuccess)
+                    uploadFailed=(action uploadFailed)
+                    validate=(action validate)}}`);
+
+                fileUpload(this.$('input[type="file"]'), ['test'], {type: 'image/png'});
+
+                wait().then(() => {
+                    expect(validate.calledOnce).to.be.true;
+                    expect(uploadSuccess.called).to.be.false;
+                    expect(uploadFailed.calledOnce).to.be.true;
+                    expect(this.$('.failed').length, 'error message is displayed').to.equal(1);
+                    expect(this.$('.failed').text()).to.match(/The image type you uploaded is not supported/);
                     done();
                 });
             });
