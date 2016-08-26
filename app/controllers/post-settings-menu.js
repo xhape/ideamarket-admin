@@ -26,6 +26,7 @@ export default Controller.extend(SettingsMenuMixin, {
     ghostPaths: injectService(),
     notifications: injectService(),
     session: injectService(),
+    slugGenerator: injectService(),
     timeZone: injectService(),
 
     initializeSelectedAuthor: observer('model', function () {
