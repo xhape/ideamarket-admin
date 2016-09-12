@@ -5,14 +5,14 @@ import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
 import {
     UnsupportedMediaTypeError,
     isThemeValidationError
-} from 'ghost-admin/services/ajax';
+} from 'ideamarket-admin/services/ajax';
 import {isBlank} from 'ember-utils';
 import run from 'ember-runloop';
 import injectService from 'ember-service/inject';
 
 export default ModalComponent.extend({
 
-    accept: 'application/zip',
+    accept: ['application/zip', 'application/x-zip-compressed'],
     availableThemes: null,
     closeDisabled: false,
     file: null,
