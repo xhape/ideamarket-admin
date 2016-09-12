@@ -4,7 +4,7 @@ import Controller from 'ember-controller';
 import injectService from 'ember-service/inject';
 import {isBlank} from 'ember-utils';
 import {isEmberArray} from 'ember-array/utils';
-import {UnsupportedMediaTypeError, isUnsupportedMediaTypeError} from 'ghost-admin/services/ajax';
+import {UnsupportedMediaTypeError, isUnsupportedMediaTypeError} from 'ideamarket-admin/services/ajax';
 
 const {Promise} = RSVP;
 
