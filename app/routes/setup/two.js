@@ -2,7 +2,7 @@ import Route from 'ember-route';
 import injectService from 'ember-service/inject';
 import {
     isVersionMismatchError
-} from 'ghost-admin/services/ajax';
+} from 'ideamarket-admin/services/ajax';
 
 export default Route.extend({
 

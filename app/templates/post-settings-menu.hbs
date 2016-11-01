@@ -85,14 +85,14 @@
                 <label for="visibility">Visibility</label>
                 <span class="input-icon icon-lock">
                     <span class="gh-select" tabindex="0">
-                        {{gh-select-native
+                        {{one-way-select
                             name="post-setting-visibility"
                             id="visibility"
-                            content=visibilities
+                            options=visibilities
                             optionValuePath="value"
                             optionLabelPath="label"
-                            selection=selectedVisibility
-                            action="changeVisibility"
+                            value=selectedVisibility
+                            update=(action "changeVisibility")
                         }}
                     </span>
                 </span>

@@ -1,5 +1,5 @@
 {
-  "name": "ghost-admin",
+  "name": "ideamarket-admin",
   "dependencies": {
     "devicejs": "0.2.7",
     "ember": "2.9.0",

@@ -6,7 +6,7 @@ import {assign} from 'ember-platform';
 import {
     VersionMismatchError,
     isVersionMismatchError
-} from 'ghost-admin/services/ajax';
+} from 'ideamarket-admin/services/ajax';
 
 import DS from 'ember-data';
 import Configuration from 'ember-simple-auth/configuration';
