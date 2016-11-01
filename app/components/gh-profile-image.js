@@ -24,7 +24,7 @@ import {isNotFoundError} from 'ember-ajax/errors';
  */
 export default Component.extend({
     email: '',
-    size: 90,
+    size: 180,
     debounce: 300,
 
     validEmail: '',
@@ -44,7 +44,7 @@ export default Component.extend({
     },
 
     defaultImage: computed('ghostPaths', function () {
-        let url = `${this.get('ghostPaths.subdir')}/ghost/img/user-image.png`;
+        let url = `${this.get('ghostPaths.assetRoot')}/img/user-image.png`;
         return htmlSafe(`background-image: url(${url})`);
     }),
 
@@ -71,7 +71,7 @@ export default Component.extend({
 
             this.get('ajax').request(gravatarUrl)
                 .catch((error) => {
-                    let defaultImageUrl = `url("${this.get('ghostPaths.subdir')}/ghost/img/user-image.png")`;
+                    let defaultImageUrl = `url("${this.get('ghostPaths.assetRoot')}/img/user-image.png")`;
 
                     if (isNotFoundError(error)) {
                         this.$('.placeholder-img')[0].style.backgroundImage = htmlSafe(defaultImageUrl);

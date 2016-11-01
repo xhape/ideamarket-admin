@@ -9,8 +9,13 @@ import { expect } from 'chai';
 import $ from 'jquery';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
-import { invalidateSession, authenticateSession } from 'ghost-admin/tests/helpers/ember-simple-auth';
+import { invalidateSession, authenticateSession } from '../helpers/ember-simple-auth';
+import { enableGhostOAuth } from '../helpers/configuration';
 import Mirage from 'ember-cli-mirage';
+import {
+    stubSuccessfulOAuthConnect,
+    stubFailedOAuthConnect
+} from '../helpers/oauth';
 
 describe('Acceptance: Signin', function() {
     let application;
@@ -126,6 +131,50 @@ describe('Acceptance: Signin', function() {
 
             andThen(() => {
                 expect(currentURL(), 'currentURL').to.equal('/');
+            });
+        });
+    });
+
+    describe('using Ghost OAuth', function () {
+        beforeEach(function () {
+            enableGhostOAuth(server);
+        });
+
+        it('can sign in successfully', function () {
+            server.loadFixtures('roles');
+            stubSuccessfulOAuthConnect(application);
+
+            visit('/signin');
+
+            andThen(() => {
+                expect(currentURL(), 'current url').to.equal('/signin');
+
+                expect(
+                    find('button.login').text().trim(),
+                    'login button text'
+                ).to.equal('Sign in with Ghost');
+            });
+
+            click('button.login');
+
+            andThen(() => {
+                expect(currentURL(), 'url after connect').to.equal('/');
+            });
+        });
+
+        it('handles a failed connect', function () {
+            stubFailedOAuthConnect(application);
+
+            visit('/signin');
+            click('button.login');
+
+            andThen(() => {
+                expect(currentURL(), 'current url').to.equal('/signin');
+
+                expect(
+                    find('.main-error').text().trim(),
+                    'sign-in error'
+                ).to.match(/Authentication with Ghost\.org denied or failed/i);
             });
         });
     });

@@ -8,6 +8,8 @@ import attr from 'ember-data/attr';
 import { belongsTo, hasMany } from 'ember-data/relationships';
 import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
+import {BLANK_DOC} from 'ghost-admin/components/ghost-editor';  // a blank mobile doc
+
 // ember-cli-shims doesn't export these so we must get them manually
 const {Comparable, compare} = Ember;
 
@@ -69,6 +71,7 @@ export default Model.extend(Comparable, ValidationEngine, {
     title: attr('string', {defaultValue: ''}),
     slug: attr('string'),
     markdown: attr('string', {defaultValue: ''}),
+    mobiledoc: attr('json-string', {defaultValue: BLANK_DOC}),
     html: attr('string'),
     image: attr('string'),
     featured: attr('boolean', {defaultValue: false}),

@@ -52,7 +52,6 @@ export default AuthenticatedRoute.extend(base, {
 
     setupController(controller) {
         this._super(...arguments);
-
         controller.set('shouldFocusEditor', this.get('_transitionedFromNew'));
     },
 

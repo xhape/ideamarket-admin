@@ -143,7 +143,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('init', 'Install the client dependencies',
-        ['shell:npm-install', 'shell:bower-install', 'buildAboutPage']
+        ['shell:npm-install', 'shell:bower-install']
     );
 
     grunt.registerTask('lint', 'Run the code style checks and linter',
@@ -216,7 +216,7 @@ module.exports = function(grunt) {
         ).then(function (results) {
             var contributors = mergeContribs(results[1], results[2]),
                 contributorTemplate = '<article>\n    <a href="<%= githubUrl %>" title="<%= name %>">\n' +
-                    '        <img src="{{gh-path "admin" "/img/contributors"}}/<%= name %>" alt="<%= name %>" />\n' +
+                    '        <img src="{{gh-path "asset" "/img/contributors"}}/<%= name %>" alt="<%= name %>" />\n' +
                     '    </a>\n</article>',
 
                 downloadImagePromise = function (url, name) {

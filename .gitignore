@@ -11,7 +11,7 @@ pids
 logs
 results
 
-npm-debug.log
+npm-debug.log*
 .nvmrc
 .bowerrc
 .idea/*
@@ -49,7 +49,3 @@ Session.vim
 /libpeerconnection.log
 npm-debug.log
 testem.log
-
-# built by grunt
-public/assets/img/contributors/
-app/templates/-contributors.hbs

@@ -42,7 +42,8 @@ codemirrorAssets = function () {
                 var jsTree = concat(tree, {
                     outputFile: 'assets/codemirror/codemirror.js',
                     headerFiles: ['lib/codemirror.js'],
-                    inputFiles: ['mode/**/*']
+                    inputFiles: ['mode/**/*'],
+                    sourceMapConfig: {enabled: false}
                 });
 
                 var cssTree = concat(tree, {
@@ -137,6 +138,8 @@ module.exports = function (defaults) {
     app.import('bower_components/google-caja/html-css-sanitizer-bundle.js');
     app.import('bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js');
     app.import('bower_components/lodash/lodash.js');
+
+
 
     if (app.env === 'test') {
         app.import(app.bowerDirectory + '/jquery.simulate.drag-sortable/jquery.simulate.drag-sortable.js', {type: 'test'});

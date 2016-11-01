@@ -1,4 +1,6 @@
 import mockAuthentication from './config/authentication';
+import mockConfiguration from './config/configuration';
+import mockInvites from './config/invites';
 import mockPosts from './config/posts';
 import mockRoles from './config/roles';
 import mockSettings from './config/settings';
@@ -15,12 +17,10 @@ export default function () {
     this.namespace = '/ghost/api/v0.1';    // make this `api`, for example, if your API is namespaced
     this.timing = 400;      // delay for each request, automatically set to 0 during testing
 
-    // Mock endpoints here to override real API requests during development
+    // Mock endpoints here to override real API requests during development, eg...
     // this.put('/posts/:id/', versionMismatchResponse);
-    // mockSubscribers(this);
-    this.loadFixtures('settings');
-    mockSettings(this);
-    mockThemes(this);
+    // mockTags(this);
+    // this.loadFixtures('settings');
 
     // keep this line, it allows all other API requests to hit the real server
     this.passthrough();
@@ -38,6 +38,8 @@ export function testConfig() {
     // this.logging = true;
 
     mockAuthentication(this);
+    mockConfiguration(this);
+    mockInvites(this);
     mockPosts(this);
     mockRoles(this);
     mockSettings(this);
@@ -55,16 +57,6 @@ export function testConfig() {
 
     this.post('/slack/test', function () {
         return {};
-    });
-
-    /* Configuration -------------------------------------------------------- */
-
-    this.get('/configuration/timezones/', function (db) {
-        return {
-            configuration: [{
-                timezones: db.timezones
-            }]
-        };
     });
 
     /* External sites ------------------------------------------------------- */

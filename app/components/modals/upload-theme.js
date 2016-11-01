@@ -6,13 +6,14 @@ import {
     UnsupportedMediaTypeError,
     isThemeValidationError
 } from 'ideamarket-admin/services/ajax';
-import {isBlank} from 'ember-utils';
 import run from 'ember-runloop';
 import injectService from 'ember-service/inject';
+import get from 'ember-metal/get';
 
 export default ModalComponent.extend({
 
     accept: ['application/zip', 'application/x-zip-compressed'],
+    extensions: ['zip'],
     availableThemes: null,
     closeDisabled: false,
     file: null,
@@ -47,13 +48,16 @@ export default ModalComponent.extend({
 
     actions: {
         validateTheme(file) {
-            let accept = this.get('accept');
-            let themeName = file.name.replace(/\.zip$/, '');
+            let themeName = file.name.replace(/\.zip$/, '').replace(/[^\w@.]/gi, '-');
+
             let availableThemeNames = this.get('availableThemeNames');
 
             this.set('file', file);
 
-            if (!isBlank(accept) && file && accept.indexOf(file.type) === -1) {
+            let [, extension] = (/(?:\.([^.]+))?$/).exec(file.name);
+            let extensions = this.get('extensions');
+
+            if (!extension || extensions.indexOf(extension.toLowerCase()) === -1) {
                 return new UnsupportedMediaTypeError();
             }
 
@@ -89,7 +93,14 @@ export default ModalComponent.extend({
         },
 
         uploadSuccess(response) {
-            this.set('theme', response.themes[0]);
+            let [theme] = response.themes;
+
+            this.set('theme', theme);
+
+            if (get(theme, 'warnings.length') > 0) {
+                this.set('validationWarnings', theme.warnings);
+            }
+
             // invoke the passed in confirm action
             invokeAction(this, 'model.uploadSuccess', this.get('theme'));
         },

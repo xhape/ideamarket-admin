@@ -20,6 +20,7 @@ export default Controller.extend({
     _scratchTwitter: null,
 
     ajax: injectService(),
+    config: injectService(),
     dropdown: injectService(),
     ghostPaths: injectService(),
     notifications: injectService(),
@@ -51,9 +52,13 @@ export default Controller.extend({
         }
     }),
 
+    canChangePassword: computed('config.ghostOAuth', 'isAdminUserOnOwnerProfile', function () {
+        return !this.get('config.ghostOAuth') && !this.get('isAdminUserOnOwnerProfile');
+    }),
+
     // duplicated in gh-user-active -- find a better home and consolidate?
     userDefault: computed('ghostPaths', function () {
-        return `${this.get('ghostPaths.subdir')}/ghost/img/user-image.png`;
+        return `${this.get('ghostPaths.assetRoot')}/img/user-image.png`;
     }),
 
     userImageBackground: computed('user.image', 'userDefault', function () {
@@ -64,7 +69,7 @@ export default Controller.extend({
     // end duplicated
 
     coverDefault: computed('ghostPaths', function () {
-        return `${this.get('ghostPaths.subdir')}/ghost/img/user-cover.png`;
+        return `${this.get('ghostPaths.assetRoot')}/img/user-cover.png`;
     }),
 
     coverImageBackground: computed('user.cover', 'coverDefault', function () {

@@ -2,7 +2,7 @@ import Controller from 'ember-controller';
 import RSVP from 'rsvp';
 import injectService from 'ember-service/inject';
 import injectController from 'ember-controller/inject';
-import {isEmberArray} from 'ember-array/utils';
+import {isInvalidError} from 'ember-ajax/errors';
 
 import ValidationEngine from 'ideamarket-admin/mixins/validation-engine';
 
@@ -42,7 +42,8 @@ export default Controller.extend(ValidationEngine, {
                 .success((response) => {
                     let usersUrl = this.get('ghostPaths.url').api('users', user.id.toString());
                     user.image = response;
-                    this.get('ajax').put(usersUrl, {
+
+                    return this.get('ajax').put(usersUrl, {
                         data: {
                             users: [user]
                         }
@@ -55,7 +56,7 @@ export default Controller.extend(ValidationEngine, {
     _handleSaveError(resp) {
         this.toggleProperty('submitting');
 
-        if (resp && resp.errors && isEmberArray(resp.errors)) {
+        if (isInvalidError(resp)) {
             this.set('flowErrors', resp.errors[0].message);
         } else {
             this.get('notifications').showAPIError(resp, {key: 'setup.blog-details'});
@@ -74,29 +75,21 @@ export default Controller.extend(ValidationEngine, {
 
     afterAuthentication(result) {
         if (this.get('image')) {
-            this.sendImage(result.users[0])
+            return this.sendImage(result.users[0])
             .then(() => {
                 this.toggleProperty('submitting');
-                this.transitionToRoute('setup.three');
+                return this.transitionToRoute('setup.three');
             }).catch((resp) => {
                 this.toggleProperty('submitting');
                 this.get('notifications').showAPIError(resp, {key: 'setup.blog-details'});
             });
         } else {
             this.toggleProperty('submitting');
-            this.transitionToRoute('setup.three');
+            return this.transitionToRoute('setup.three');
         }
     },
 
-    actions: {
-        preValidate(model) {
-            // Only triggers validation if a value has been entered, preventing empty errors on focusOut
-            if (this.get(model)) {
-                this.validate({property: model});
-            }
-        },
-
-        setup() {
+    _passwordSetup() {
             let setupProperties = ['blogTitle', 'name', 'email', 'password'];
             let data = this.getProperties(setupProperties);
             let config = this.get('config');
@@ -106,9 +99,11 @@ export default Controller.extend(ValidationEngine, {
             this.set('flowErrors', '');
 
             this.get('hasValidated').addObjects(setupProperties);
-            this.validate().then(() => {
+
+        return this.validate().then(() => {
                 let authUrl = this.get('ghostPaths.url').api('authentication', 'setup');
-                this.get('ajax')[method](authUrl, {
+
+            return this.get('ajax')[method](authUrl, {
                     data: {
                         setup: [{
                             name: data.name,
@@ -124,7 +119,8 @@ export default Controller.extend(ValidationEngine, {
 
                     // Don't call the success handler, otherwise we will be redirected to admin
                     this.set('session.skipAuthSuccessHandler', true);
-                    this.get('session').authenticate('authenticator:oauth2', this.get('email'), this.get('password')).then(() => {
+
+                return this.get('session').authenticate('authenticator:oauth2', this.get('email'), this.get('password')).then(() => {
                         this.set('blogCreated', true);
                         return this.afterAuthentication(result);
                     }).catch((error) => {
@@ -139,6 +135,58 @@ export default Controller.extend(ValidationEngine, {
                 this.toggleProperty('submitting');
                 this.set('flowErrors', 'Please fill out the form to setup your blog.');
             });
+        },
+
+    // TODO: for OAuth ghost is in the "setup completed" step as soon
+    // as a user has been authenticated so we need to use the standard settings
+    // update to set the blog title before redirecting
+    _oauthSetup() {
+        let blogTitle = this.get('blogTitle');
+        let config = this.get('config');
+
+        this.get('hasValidated').addObjects(['blogTitle', 'session']);
+
+        return this.validate().then(() => {
+            return this.store.queryRecord('setting', {type: 'blog,theme,private'})
+                .then((settings) => {
+                    settings.set('title', blogTitle);
+
+                    return settings.save()
+                        .then((settings) => {
+                            // update the config so that the blog title shown in
+                            // the nav bar is also updated
+                            config.set('blogTitle', settings.get('title'));
+
+                            // this.blogCreated is used by step 3 to check if step 2
+                            // has been completed
+                            this.set('blogCreated', true);
+                            return this.afterAuthentication(settings);
+                        })
+                        .catch((error) => {
+                            this._handleSaveError(error);
+                        });
+                })
+                .finally(() => {
+                    this.toggleProperty('submitting');
+                    this.set('session.skipAuthSuccessHandler', undefined);
+                });
+        });
+    },
+
+    actions: {
+        preValidate(model) {
+            // Only triggers validation if a value has been entered, preventing empty errors on focusOut
+            if (this.get(model)) {
+                return this.validate({property: model});
+            }
+        },
+
+        setup() {
+            if (this.get('config.ghostOAuth')) {
+                return this._oauthSetup();
+            } else {
+                return this._passwordSetup();
+            }
         },
 
         setImage(image) {

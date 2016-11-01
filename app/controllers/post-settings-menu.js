@@ -480,7 +480,7 @@ export default Controller.extend(SettingsMenuMixin, {
             tagName = tagName.trim();
 
             // abort if tag is already selected
-            if (currentTagNames.contains(tagName.toLowerCase())) {
+            if (currentTagNames.includes(tagName.toLowerCase())) {
                 return;
             }
 
@@ -490,7 +490,7 @@ export default Controller.extend(SettingsMenuMixin, {
                 });
 
                 // find existing tag or create new
-                if (availableTagNames.contains(tagName.toLowerCase())) {
+                if (availableTagNames.includes(tagName.toLowerCase())) {
                     tagToAdd = availableTags.find((tag) => {
                         return tag.get('name').toLowerCase() === tagName.toLowerCase();
                     });

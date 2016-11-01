@@ -1,4 +1,5 @@
 /* jshint expr:true */
+import Ember from 'ember';
 import {
     describe,
     it,
@@ -6,10 +7,16 @@ import {
     afterEach
 } from 'mocha';
 import { expect } from 'chai';
-import startApp from 'ghost-admin/tests/helpers/start-app';
-import destroyApp from 'ghost-admin/tests/helpers/destroy-app';
-import { invalidateSession, authenticateSession } from 'ghost-admin/tests/helpers/ember-simple-auth';
+import startApp from '../helpers/start-app';
+import destroyApp from '../helpers/destroy-app';
+import { invalidateSession, authenticateSession } from '../helpers/ember-simple-auth';
+import { enableGhostOAuth } from '../helpers/configuration';
 import Mirage from 'ember-cli-mirage';
+import $ from 'jquery';
+import {
+    stubSuccessfulOAuthConnect,
+    stubFailedOAuthConnect
+} from '../helpers/oauth';
 
 describe('Acceptance: Setup', function () {
     let application;
@@ -266,13 +273,13 @@ describe('Acceptance: Setup', function () {
         it('handles validation errors in step 3', function () {
             let input = '[name="users"]';
             let postCount = 0;
-            let button, formGroup, user;
+            let button, formGroup, invite;
 
             invalidateSession(application);
             server.loadFixtures('roles');
 
-            server.post('/users', function (db, request) {
-                let [params] = JSON.parse(request.requestBody).users;
+            server.post('/invites', function (db, request) {
+                let [params] = JSON.parse(request.requestBody).invites;
 
                 postCount++;
 
@@ -288,10 +295,21 @@ describe('Acceptance: Setup', function () {
                     });
                 }
 
+                // TODO: duplicated from mirage/config/invites - extract method?
+                /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+                params.token = `${db.invites.length}-token`;
+                params.expires = moment.utc().add(1, 'day').unix();
+                params.created_at = moment.utc().format();
+                params.created_by = 1;
+                params.updated_at = moment.utc().format();
+                params.updated_by = 1;
+                params.status = 'sent';
+                /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+
                 // valid
-                user = db.users.insert(params);
+                invite = db.invites.insert(params);
                 return {
-                    users: [user]
+                    invites: [invite]
                 };
             });
 
@@ -395,6 +413,117 @@ describe('Acceptance: Setup', function () {
                 // it displays failure alert
                 expect(find('.gh-alert-red').length, 'number of failure alerts')
                     .to.equal(1);
+            });
+        });
+    });
+
+    describe('using Ghost OAuth', function () {
+        beforeEach(function () {
+            // mimic a new install
+            server.get('/authentication/setup/', function () {
+                return {
+                    setup: [
+                        {status: false}
+                    ]
+                };
+            });
+
+            // ensure we have settings (to pass validation) and roles available
+            enableGhostOAuth(server);
+            server.loadFixtures('settings');
+            server.loadFixtures('roles');
+        });
+
+        it('displays the connect form and validates', function () {
+            invalidateSession(application);
+
+            visit('/setup');
+
+            andThen(() => {
+                // it redirects to step one
+                expect(
+                    currentURL(),
+                    'url after accessing /setup'
+                ).to.equal('/setup/one');
+            });
+
+            click('.btn-green');
+
+            andThen(() => {
+                expect(
+                    find('button.login').text().trim(),
+                    'login button text'
+                ).to.equal('Sign in with Ghost');
+            });
+
+            click('.btn-green');
+
+            andThen(() => {
+                let sessionFG = find('button.login').closest('.form-group');
+                let titleFG = find('input[name="blog-title"]').closest('.form-group');
+
+                // session is validated
+                expect(
+                    sessionFG.hasClass('error'),
+                    'session form group has error class'
+                ).to.be.true;
+
+                expect(
+                    sessionFG.find('.response').text().trim(),
+                    'session validation text'
+                ).to.match(/Please connect a Ghost\.org account/i);
+
+                // blog title is validated
+                expect(
+                    titleFG.hasClass('error'),
+                    'title form group has error class'
+                ).to.be.true;
+
+                expect(
+                    titleFG.find('.response').text().trim(),
+                    'title validation text'
+                ).to.match(/please enter a blog title/i);
+            });
+
+            // TODO: test that connecting clears session validation error
+            // TODO: test that typing in blog title clears validation error
+        });
+
+        it('can connect and setup successfully', function () {
+            stubSuccessfulOAuthConnect(application);
+
+            visit('/setup/two');
+            click('button.login');
+
+            andThen(() => {
+                expect(
+                    find('button.login').text().trim(),
+                    'login button text when connected'
+                ).to.equal('Connected: oauthtest@example.com');
+            });
+
+            fillIn('input[name="blog-title"]', 'Ghostbusters');
+            click('.btn-green');
+
+            andThen(() => {
+                expect(
+                    currentURL(),
+                    'url after submitting'
+                ).to.equal('/setup/three');
+            });
+        });
+
+        it('handles failed connect', function () {
+            stubFailedOAuthConnect(application);
+
+            visit('/setup/two');
+            click('button.login');
+
+            andThen(() => {
+                expect(
+                    find('.main-error').text().trim(),
+                    'error text after failed oauth connect'
+                ).to.match(/authentication with ghost\.org denied or failed/i);
             });
         });
     });
