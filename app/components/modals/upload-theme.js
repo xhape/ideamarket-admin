@@ -5,12 +5,8 @@ import ghostPaths from 'ideamarket-admin/utils/ghost-paths';
 import {
     UnsupportedMediaTypeError,
     isThemeValidationError
-<<<<<<< HEAD
 } from 'ideamarket-admin/services/ajax';
 import {isBlank} from 'ember-utils';
-=======
-} from 'ghost-admin/services/ajax';
->>>>>>> 3b56d365e6419b5238b2ffbb5b0d0f8139d6163f
 import run from 'ember-runloop';
 import injectService from 'ember-service/inject';
 import get from 'ember-metal/get';
